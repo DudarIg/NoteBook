@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteBook">
         <activity
+            android:name=".NoteEditActivity"
+            android:exported="true" />
+        <activity
             android:name=".NotesListActivity"
             android:exported="true">
             <intent-filter>
