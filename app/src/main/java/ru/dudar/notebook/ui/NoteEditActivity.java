@@ -2,6 +2,7 @@ package ru.dudar.notebook.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,12 +17,13 @@ import ru.dudar.notebook.impl.NotesRepoImpl;
 
 public class NoteEditActivity extends AppCompatActivity {
     static final String SET_KEY_IN = "SET_KEY_IN";
+    static final String SET_KEY_OUT = "SET_KEY_OUT";
 
 
     private EditText titleEditText;
     private EditText detailEditText;
     private Button saveButton;
-    private int dataId;
+    private int dataId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +34,17 @@ public class NoteEditActivity extends AppCompatActivity {
         detailEditText = findViewById(R.id.delail_edit_text);
         saveButton = findViewById(R.id.save_button);
 
-       // loadIntent();
+       loadIntent();
 
 
         saveButton.setOnClickListener(view -> {
-            NoteEntity noteEntity = new NoteEntity(dataId,
-                    titleEditText.getText().toString(),
-                    detailEditText.getText().toString());
+                NoteEntity noteEntity = new NoteEntity(
+                        titleEditText.getText().toString(),
+                        detailEditText.getText().toString());
+                noteEntity.setId(dataId);
+            Intent resultIntent = new Intent().putExtra(SET_KEY_OUT, noteEntity);
+            setResult(Activity.RESULT_OK, resultIntent);
+            finish();
 //            NotesListActivity.
 //            Intent intent = new Intent(this, NotesListActivity.class);
 //            intent.putExtra(NotesListActivity.SET_KEY_OUT, noteEntity);

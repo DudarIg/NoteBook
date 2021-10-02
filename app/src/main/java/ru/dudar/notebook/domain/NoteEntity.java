@@ -7,8 +7,8 @@ public class NoteEntity implements Serializable {
     private String title;
     private String detail;
 
-    public NoteEntity(int id, String title, String detail) {
-        this.id = id;
+    public NoteEntity(String title, String detail) {
+        //this.id = id;
         this.title = title;
         this.detail = detail;
     }
