@@ -37,6 +37,8 @@ public class NotesAdapter<clickListener> extends RecyclerView.Adapter<NoteViewHo
         NoteEntity note = data.get(position);
         holder.titleTextView.setText(note.getTitle());
         holder.detailTextView.setText(note.getDetail());
+        holder.dataTextView.setText(note.getData());
+
         holder.itemView.setOnClickListener(view -> {
             clickListener.onItemClick(note);
         });

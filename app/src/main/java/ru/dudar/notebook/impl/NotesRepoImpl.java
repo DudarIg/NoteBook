@@ -1,7 +1,13 @@
 package ru.dudar.notebook.impl;
 
+
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
 
 import ru.dudar.notebook.domain.NoteEntity;
 import ru.dudar.notebook.domain.NotesRepo;
@@ -19,6 +25,7 @@ public class NotesRepoImpl implements NotesRepo {
     @Override
     public boolean createNote(NoteEntity note) {
         note.setId(++counter);
+        note.setData(getCurrentTime());
         cache.add(note);
         return true;
     }
@@ -38,7 +45,14 @@ public class NotesRepoImpl implements NotesRepo {
     public boolean editNote(int id, NoteEntity note) {
         deleteNote(id);
         note.setId(id);
+        note.setData(getCurrentTime());
         cache.add(note);
         return true;
+    }
+    public String getCurrentTime() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy kk:mm", Locale.getDefault());
+        return formatter.format(date);
+
     }
 }
