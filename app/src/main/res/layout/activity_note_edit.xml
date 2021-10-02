@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size24"
         tools:text="@string/text_zag"
-        android:hint="Заголовок"/>
+        android:hint="@string/hint_zag"/>
     <EditText
         android:id="@+id/delail_edit_text"
         android:layout_width="match_parent"

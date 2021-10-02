@@ -21,13 +21,11 @@ import ru.dudar.notebook.ui.NoteEditActivity;
 
 public class NotesListActivity extends AppCompatActivity {
 
-    private final NotesRepo notesRepo = new NotesRepoImpl();
+    static final String SET_KEY_OUT = "SET_KEY_OUT";
+    public NotesRepo notesRepo = new NotesRepoImpl();
     private RecyclerView recyclerView;
     private NotesAdapter adapter = new NotesAdapter();
 
-    public static Intent getContext() {
-        return getContext();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,35 +38,37 @@ public class NotesListActivity extends AppCompatActivity {
 
 
 
+
     }
 
     private void initRecycleView() {
         recyclerView = findViewById(R.id.recycleview);
         recyclerView .setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this::onItemClick);
         adapter.setData(notesRepo.getNotes());
 
-       // adapter.setOnItemClickListener(this::onItemClick);
+
 
     }
 
-//    private void onItemClick(NoteEntity item) {
-//        openNoteEditActivity();
-//    }
+    private void onItemClick(NoteEntity item) {
+        openNoteEditActivity();
+    }
 
     private void initNoteRepo() {
-        notesRepo.createNote(new NoteEntity("Запись 1", "Содержание записи номер 1"));
-        notesRepo.createNote(new NoteEntity("Запись 2", "Содержание записи номер 2"));
-        notesRepo.createNote(new NoteEntity("Запись 3", "Содержание записи номер 3"));
-        notesRepo.createNote(new NoteEntity("Запись 4", "Содержание записи номер 4"));
-        notesRepo.createNote(new NoteEntity("Запись 5", "Содержание записи номер 5"));
-        notesRepo.createNote(new NoteEntity("Запись 6", "Содержание записи номер 6"));
-        notesRepo.createNote(new NoteEntity("Запись 7", "Содержание записи номер 7"));
-        notesRepo.createNote(new NoteEntity("Запись 8", "Содержание записи номер 8"));
-        notesRepo.createNote(new NoteEntity("Запись 9", "Содержание записи номер 9"));
-        notesRepo.createNote(new NoteEntity("Запись 10", "Содержание записи номер 10"));
-        notesRepo.createNote(new NoteEntity("Запись 11", "Содержание записи номер 11"));
-        notesRepo.createNote(new NoteEntity("Запись 12", "Содержание записи номер 12"));
+        notesRepo.createNote(new NoteEntity(1,"Запись 1", "Содержание записи номер 1"));
+        notesRepo.createNote(new NoteEntity(2,"Запись 2", "Содержание записи номер 2"));
+        notesRepo.createNote(new NoteEntity(3,"Запись 3", "Содержание записи номер 3"));
+        notesRepo.createNote(new NoteEntity(4,"Запись 4", "Содержание записи номер 4"));
+        notesRepo.createNote(new NoteEntity(5,"Запись 5", "Содержание записи номер 5"));
+        notesRepo.createNote(new NoteEntity(6,"Запись 6", "Содержание записи номер 6"));
+        notesRepo.createNote(new NoteEntity(7,"Запись 7", "Содержание записи номер 7"));
+        notesRepo.createNote(new NoteEntity(8,"Запись 8", "Содержание записи номер 8"));
+        notesRepo.createNote(new NoteEntity(9,"Запись 9", "Содержание записи номер 9"));
+        notesRepo.createNote(new NoteEntity(10,"Запись 10", "Содержание записи номер 10"));
+        notesRepo.createNote(new NoteEntity(11,"Запись 11", "Содержание записи номер 11"));
+        notesRepo.createNote(new NoteEntity(12,"Запись 12", "Содержание записи номер 12"));
     }
 
     @Override

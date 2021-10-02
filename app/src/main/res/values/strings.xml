@@ -4,4 +4,5 @@
     <string name="hint_text">Текст заметки...</string>
     <string name="button_save">Сохранить</string>
     <string name="text_zag">Это заголовок</string>
+    <string name="hint_zag">Заголовок</string>
 </resources>

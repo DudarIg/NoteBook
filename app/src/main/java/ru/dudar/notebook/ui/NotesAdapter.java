@@ -13,9 +13,10 @@ import java.util.List;
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
-public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
+public class NotesAdapter<clickListener> extends RecyclerView.Adapter<NoteViewHolder> {
 
     private List<NoteEntity> data = new ArrayList<>();
+    private OnItemClickListener clickListener = null;
 
     public void setData(List<NoteEntity> data) {
         this.data = data;
@@ -27,7 +28,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
     @Override
     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
-        return new NoteViewHolder(view, parent.getContext());
+        return new NoteViewHolder(view);
     }
 
     @Override
@@ -35,6 +36,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         NoteEntity note = data.get(position);
         holder.titleTextView.setText(note.getTitle());
         holder.detailTextView.setText(note.getDetail());
+        holder.itemView.setOnClickListener(view -> {
+            clickListener.onItemClick(note);
+        });
     }
 
     @Override
@@ -42,10 +46,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         return data.size();
     }
 
-//    public void setOnItemClickListener(OnItemClickListener onItemClick) {
-//        //todo
-//    }
-//    interface OnItemClickListener {
-//        void onItemClick(NoteEntity item);
-//    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        clickListener = listener;
+    }
+
+    interface OnItemClickListener {
+        void onItemClick(NoteEntity item);
+    }
 }

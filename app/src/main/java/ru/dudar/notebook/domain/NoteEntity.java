@@ -1,12 +1,14 @@
 package ru.dudar.notebook.domain;
 
-public class NoteEntity {
+import java.io.Serializable;
+
+public class NoteEntity implements Serializable {
     private int id;
     private String title;
     private String detail;
 
-    public NoteEntity(String title, String detail) {
-        //this.id = id;
+    public NoteEntity(int id, String title, String detail) {
+        this.id = id;
         this.title = title;
         this.detail = detail;
     }
