@@ -3,4 +3,5 @@
     <dimen name="margin10">10dp</dimen>
     <dimen name="text_size24">24sp</dimen>
     <dimen name="text_size18">18sp</dimen>
+    <dimen name="zero">0dp</dimen>
 </resources>

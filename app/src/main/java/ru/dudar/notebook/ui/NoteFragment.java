@@ -1,8 +1,5 @@
 package ru.dudar.notebook.ui;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,14 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
 public class NoteFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM = "param";
 
     private EditText titleEditText;
     private EditText detailEditText;
@@ -33,11 +29,10 @@ public class NoteFragment extends Fragment {
     public static NoteFragment newInstance(NoteEntity tempData) {
         NoteFragment noteFragment = new NoteFragment();
         Bundle bindle = new Bundle();
-        bindle.putSerializable(ARG_PARAM1, tempData);
+        bindle.putSerializable(ARG_PARAM, tempData);
         noteFragment.setArguments(bindle);
         return noteFragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +46,7 @@ public class NoteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            setData  = (NoteEntity) getArguments().getSerializable(ARG_PARAM1);
+            setData  = (NoteEntity) getArguments().getSerializable(ARG_PARAM);
         }
         titleEditText = view.findViewById(R.id.title_edit_text);
         detailEditText = view.findViewById(R.id.delail_edit_text);
@@ -75,37 +70,8 @@ public class NoteFragment extends Fragment {
                 ((NotesListActivity) getActivity()).notesRepo.createNote(resultNote);
             }
 
+            requireActivity().getSupportFragmentManager().popBackStack();
 
-
-
-
-
-
-
-
-
-            requireActivity().getSupportFragmentManager()
-                    .popBackStack();
-
-//            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//                requireActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .add(R.id.start_fragment_left, new ListFragment())
-//                        .commit();
-//            }
-
-
-//            if (dataId != -1) {
-//                ListFragment.notesRepo.editNote(noteEntity.getId(), noteEntity);
-//            }
-//            if (resultNote.getId() == -1) {
-//                notesRepo.createNote(resultNote);
-//            } else {
-//                super.onActivityResult(requestCode, resultCode, data);
-//            }
-//            adapter.notifyDataSetChanged();
-//
-//            finish();
         });
     }
 

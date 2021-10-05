@@ -35,9 +35,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         setContentView(R.layout.activity_start);
 
         initToolbar();
-       // if (savedInstanceState == null)
-                    initNoteRepo();
-
+        initNoteRepo();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             getSupportFragmentManager()
@@ -49,15 +47,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
                     .beginTransaction()
                     .add(R.id.start_fragment, new ListFragment())
                     .commit();
-
         }
-
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("1", "Запущено");
     }
 
     public void startNoteFragment(NoteEntity item) {
@@ -74,10 +64,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
                     .addToBackStack(null)
                     .commit();
         }
-
-
     }
-
 
     private void initNoteRepo() {
         notesRepo.createNote(new NoteEntity("Запись 1", "Содержание записи номер 1"));
@@ -94,7 +81,6 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         notesRepo.createNote(new NoteEntity("Запись 12", "Содержание записи номер 12"));
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -110,31 +96,6 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    public void openNoteEditActivity(NoteEntity item) {
-//        Intent intent = new Intent(this, NoteEditActivity.class);
-//        intent.putExtra(NoteEditActivity.SET_KEY_IN, item);
-//        startActivityForResult(intent, REQUEST_CODE);
-//    }
-
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-//            resultNote = (NoteEntity) data.getSerializableExtra(NoteEditActivity.SET_KEY_OUT);
-//            if (resultNote.getId() != -1) {
-//                notesRepo.editNote(resultNote.getId(), resultNote);
-//            }
-//            if (resultNote.getId() == -1) {
-//                notesRepo.createNote(resultNote);
-//            } else {
-//                super.onActivityResult(requestCode, resultCode, data);
-//            }
-//            adapter.notifyDataSetChanged();
-//
-//        }
-//    }
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);

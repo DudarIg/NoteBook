@@ -22,12 +22,12 @@
          android:layout_weight="1">
       <FrameLayout
           android:id="@+id/start_fragment_left"
-          android:layout_width="0dp"
+          android:layout_width="@dimen/zero"
           android:layout_height="match_parent"
           android:layout_weight="1"/>
         <FrameLayout
             android:id="@+id/start_fragment_right"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
