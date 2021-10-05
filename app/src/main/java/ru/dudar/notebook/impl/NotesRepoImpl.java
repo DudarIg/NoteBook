@@ -1,6 +1,7 @@
 package ru.dudar.notebook.impl;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat;
 import ru.dudar.notebook.domain.NoteEntity;
 import ru.dudar.notebook.domain.NotesRepo;
 
-public class NotesRepoImpl implements NotesRepo {
+public class NotesRepoImpl implements NotesRepo, Serializable {
 
     private final ArrayList<NoteEntity> cache = new ArrayList<>();
     private int counter = 0;

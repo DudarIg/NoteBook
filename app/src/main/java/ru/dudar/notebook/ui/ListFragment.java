@@ -26,7 +26,7 @@ import ru.dudar.notebook.domain.NotesRepo;
 import ru.dudar.notebook.impl.NotesRepoImpl;
 
 
-public class ListFragment extends Fragment {
+public class ListFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private NotesAdapter adapter = new NotesAdapter();

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +14,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
+import java.io.Serializable;
 import java.util.List;
 
 import ru.dudar.notebook.R;
@@ -27,6 +34,8 @@ import ru.dudar.notebook.ui.NoteEditActivity;
 
 public class NotesListActivity extends AppCompatActivity implements ListFragment.Controller {
 
+    private BottomNavigationView bottomMenuView;
+
     public NotesRepo notesRepo = new NotesRepoImpl();
 
     @Override
@@ -35,19 +44,62 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         setContentView(R.layout.activity_start);
 
         initToolbar();
-        initNoteRepo();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            initBottomMenu();
+        }
+
+        if (savedInstanceState == null) {
+            initNoteRepo();
+        } else {
+            notesRepo = (NotesRepo) savedInstanceState.getSerializable("NOTESREPO");
+        }
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.start_fragment_left, new ListFragment())
+                    .replace(R.id.start_fragment_left, new ListFragment())
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.start_fragment, new ListFragment())
+                    .replace(R.id.start_fragment, new ListFragment())
                     .commit();
         }
+    }
+
+    private void initBottomMenu() {
+        bottomMenuView = findViewById(R.id.bottom_nav_menu);
+        bottomMenuView.setOnItemSelectedListener(item -> {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            Fragment fragment;
+            switch (item.getItemId()) {
+                case R.id.as_programm: {
+                    fragment = new ProgrammFragment();
+                    break;
+                }
+                case R.id.one_fragment: {
+                    fragment = new ListFragment();
+                    break;
+                }
+                case R.id.users_fragment: {
+                    fragment = new UsersFragment();
+                    break;
+                }
+                default: {
+                    fragment = new ListFragment();
+                }
+            }
+            transaction.replace(R.id.start_fragment, fragment);
+            transaction.commit();
+            return true;
+        });
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("NOTESREPO", (Serializable) notesRepo);
     }
 
     public void startNoteFragment(NoteEntity item) {
@@ -91,7 +143,6 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_note) {
             startNoteFragment(null);
-
             return true;
         }
         return super.onOptionsItemSelected(item);
