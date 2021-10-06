@@ -16,7 +16,7 @@ import android.widget.EditText;
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
-public class NoteFragment extends BaseFragment {
+public class NoteFragment extends Fragment {
 
     private static final String ARG_PARAM = "param";
 

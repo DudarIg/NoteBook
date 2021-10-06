@@ -26,7 +26,7 @@ import ru.dudar.notebook.domain.NotesRepo;
 import ru.dudar.notebook.impl.NotesRepoImpl;
 
 
-public class ListFragment extends BaseFragment {
+public class ListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private NotesAdapter adapter = new NotesAdapter();
@@ -50,6 +50,8 @@ public class ListFragment extends BaseFragment {
 
         if (savedInstanceState == null)
              initRecycleView(view);
+        else
+            adapter.notifyDataSetChanged();
     }
 
     private void initRecycleView(View view) {

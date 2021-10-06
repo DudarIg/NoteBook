@@ -49,7 +49,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         }
 
         if (savedInstanceState == null) {
-            initNoteRepo();
+            initNotesRepo();
         } else {
             notesRepo = (NotesRepo) savedInstanceState.getSerializable("NOTESREPO");
         }
@@ -118,7 +118,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         }
     }
 
-    private void initNoteRepo() {
+    private void initNotesRepo() {
         notesRepo.createNote(new NoteEntity("Запись 1", "Содержание записи номер 1"));
         notesRepo.createNote(new NoteEntity("Запись 2", "Содержание записи номер 2"));
         notesRepo.createNote(new NoteEntity("Запись 3", "Содержание записи номер 3"));
