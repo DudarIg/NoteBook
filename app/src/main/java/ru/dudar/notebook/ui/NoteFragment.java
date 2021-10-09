@@ -68,14 +68,12 @@ public class NoteFragment extends Fragment  {
 
             if (resultNote.getId() != -1) {
                 ((NotesListActivity) getActivity()).notesRepo.editNote(resultNote.getId(), resultNote);
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-                    ((NotesListActivity) getActivity()).openListFr();
             }
             if (resultNote.getId() == -1) {
                 ((NotesListActivity) getActivity()).notesRepo.createNote(resultNote);
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-                                    ((NotesListActivity) getActivity()).openListFr();
             }
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                ((NotesListActivity) getActivity()).openListFr();
             requireActivity().getSupportFragmentManager().popBackStack();
 
         });
