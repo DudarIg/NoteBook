@@ -55,16 +55,19 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         }
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.start_fragment_left, new ListFragment())
-                    .commit();
+            openListFr();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.start_fragment, new ListFragment())
                     .commit();
         }
+    }
+    public  void openListFr() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.start_fragment_left, new ListFragment())
+                .commit();
     }
 
     private void initBottomMenu() {

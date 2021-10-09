@@ -16,7 +16,7 @@ import android.widget.EditText;
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
-public class NoteFragment extends Fragment {
+public class NoteFragment extends Fragment  {
 
     private static final String ARG_PARAM = "param";
 
@@ -70,14 +70,13 @@ public class NoteFragment extends Fragment {
             }
             if (resultNote.getId() == -1) {
                 ((NotesListActivity) getActivity()).notesRepo.createNote(resultNote);
+                ((NotesListActivity) getActivity()).openListFr();
             }
-
-            requireActivity().getSupportFragmentManager().popBackStack();
-
 
 
         });
     }
+
 
 
 }
