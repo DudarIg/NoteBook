@@ -30,7 +30,7 @@ import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 import ru.dudar.notebook.domain.NotesRepo;
 import ru.dudar.notebook.impl.NotesRepoImpl;
-import ru.dudar.notebook.ui.NoteEditActivity;
+
 
 public class NotesListActivity extends AppCompatActivity implements ListFragment.Controller {
 
