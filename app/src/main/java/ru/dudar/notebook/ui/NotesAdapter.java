@@ -14,7 +14,7 @@ import java.util.List;
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
-public class NotesAdapter<clickListener> extends RecyclerView.Adapter<NoteViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
 
     private List<NoteEntity> data = new ArrayList<>();
     private OnItemClickListener clickListener = null;

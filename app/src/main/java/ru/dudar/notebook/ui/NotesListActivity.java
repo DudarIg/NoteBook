@@ -4,14 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.List;
 
@@ -21,34 +25,45 @@ import ru.dudar.notebook.domain.NotesRepo;
 import ru.dudar.notebook.impl.NotesRepoImpl;
 import ru.dudar.notebook.ui.NoteEditActivity;
 
-public class NotesListActivity extends AppCompatActivity {
+public class NotesListActivity extends AppCompatActivity implements ListFragment.Controller {
 
-    private final static int REQUEST_CODE = 32;
     public NotesRepo notesRepo = new NotesRepoImpl();
-    private RecyclerView recyclerView;
-    private NotesAdapter adapter = new NotesAdapter();
-    private NoteEntity resultNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes_list);
+        setContentView(R.layout.activity_start);
 
         initToolbar();
         initNoteRepo();
-        initRecycleView();
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.start_fragment_left, new ListFragment())
+                    .commit();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.start_fragment, new ListFragment())
+                    .commit();
+        }
     }
 
-    private void initRecycleView() {
-        recyclerView = findViewById(R.id.recycleview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this::onItemClick);
-        adapter.setData(notesRepo.getNotes());
-    }
-
-    private void onItemClick(NoteEntity item) {
-        openNoteEditActivity(item);
+    public void startNoteFragment(NoteEntity item) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.start_fragment_right, NoteFragment.newInstance(item))
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.start_fragment, NoteFragment.newInstance(item))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     private void initNoteRepo() {
@@ -75,38 +90,15 @@ public class NotesListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_note) {
-            openNoteEditActivity(null);
+            startNoteFragment(null);
+
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void openNoteEditActivity(NoteEntity item) {
-        Intent intent = new Intent(this, NoteEditActivity.class);
-        intent.putExtra(NoteEditActivity.SET_KEY_IN, item);
-        startActivityForResult(intent, REQUEST_CODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            resultNote = (NoteEntity) data.getSerializableExtra(NoteEditActivity.SET_KEY_OUT);
-            if (resultNote.getId() != -1) {
-                notesRepo.editNote(resultNote.getId(), resultNote);
-            }
-            if (resultNote.getId() == -1) {
-                notesRepo.createNote(resultNote);
-            } else {
-                super.onActivityResult(requestCode, resultCode, data);
-            }
-            adapter.notifyDataSetChanged();
-
-        }
     }
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
-
 }

@@ -1,9 +1,7 @@
 package ru.dudar.notebook.impl;
 
 
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -49,6 +47,7 @@ public class NotesRepoImpl implements NotesRepo {
         cache.add(note);
         return true;
     }
+
     public String getCurrentTime() {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy kk:mm", Locale.getDefault());
