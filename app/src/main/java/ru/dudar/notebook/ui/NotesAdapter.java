@@ -49,12 +49,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         holder.itemView.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
             popupMenu.inflate(R.menu.popup_menu);
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    clickLongListener.onItemLongClick(note);
-                    return true;
-                }
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                clickLongListener.onItemLongClick(note);
+                return true;
             });
             popupMenu.show();
             return true;

@@ -27,8 +27,7 @@ import ru.dudar.notebook.domain.NotesRepo;
 import ru.dudar.notebook.impl.NotesRepoImpl;
 
 
-public class ListFragment extends Fragment implements NotesAdapter.OnItemLongClickListener {
-
+public class ListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private NotesAdapter adapter = new NotesAdapter();
@@ -69,7 +68,6 @@ public class ListFragment extends Fragment implements NotesAdapter.OnItemLongCli
         openNoteFragment(item);
     }
 
-
     public void onItemLongClick(NoteEntity item) {
         ((NotesListActivity) getActivity()).notesRepo.deleteNote(item.getId());
         adapter.notifyDataSetChanged();
@@ -78,8 +76,6 @@ public class ListFragment extends Fragment implements NotesAdapter.OnItemLongCli
     public void openNoteFragment(NoteEntity item) {
         ((Controller) requireActivity()).startNoteFragment(item);
     }
-
-
 
     interface Controller {
         void startNoteFragment(NoteEntity item);
