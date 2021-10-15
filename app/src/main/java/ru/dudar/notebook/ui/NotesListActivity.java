@@ -72,6 +72,22 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
                 .commit();
     }
 
+    @Override
+    public void onBackPressed() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        //Toast.makeText(this, String.valueOf(fm.getBackStackEntryCount()), Toast.LENGTH_SHORT).show();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStackImmediate();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.exit)
+                    .setMessage(R.string.exit_note)
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.yes, (arg0, arg1) -> NotesListActivity.super.onBackPressed()).create().show();
+        }
+    }
+
     private void initBottomMenu() {
         bottomMenuView = findViewById(R.id.bottom_nav_menu);
         bottomMenuView.setOnItemSelectedListener(item -> {
