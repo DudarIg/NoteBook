@@ -12,4 +12,6 @@
     <string name="new_item">Использование</string>
     <string name="geekbrains_n_android_java">Программа написана в учебных целях на начальном учебном курсе GeekBrains\n по Android программированию на языке Java</string>
     <string name="text_prog">Текст программы может быть использован всеми без каких-либо ограничений</string>
+    <string name="exit">Выйти из приложения?</string>
+    <string name="exit_note">Вы действительно хотите выйти?</string>
 </resources>
