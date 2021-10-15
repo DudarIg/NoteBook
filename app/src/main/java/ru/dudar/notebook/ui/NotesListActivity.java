@@ -36,6 +36,7 @@ import ru.dudar.notebook.impl.NotesRepoImpl;
 
 public class NotesListActivity extends AppCompatActivity implements ListFragment.Controller {
 
+
     private BottomNavigationView bottomMenuView;
 
     public NotesRepo notesRepo = new NotesRepoImpl();
@@ -70,13 +71,22 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
                 .beginTransaction()
                 .replace(R.id.start_fragment_left, new ListFragment())
                 .commit();
+
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.start_fragment_right, NoteFragment.newInstance(null))
+                    .addToBackStack(null)
+                    .commit();
+        }
+
     }
 
     @Override
     public void onBackPressed() {
-
         FragmentManager fm = getSupportFragmentManager();
-        //Toast.makeText(this, String.valueOf(fm.getBackStackEntryCount()), Toast.LENGTH_SHORT).show();
         if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStackImmediate();
         } else {
@@ -121,6 +131,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("NOTESREPO", (Serializable) notesRepo);
+
     }
 
     public void startNoteFragment(NoteEntity item) {
