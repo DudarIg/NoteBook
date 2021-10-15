@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin10"
+    android:background="@color/teal_200"
+    tools:context=".ui.ProgrammFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+
+        android:textSize="@dimen/text_size24"
+        android:layout_height="match_parent"
+        android:text="@string/geekbrains_n_android_java" />
+
+</FrameLayout>

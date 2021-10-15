@@ -1,5 +1,7 @@
 package ru.dudar.notebook.ui;
 
+import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,7 @@ import android.widget.EditText;
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
-public class NoteFragment extends Fragment {
+public class NoteFragment extends Fragment  {
 
     private static final String ARG_PARAM = "param";
 
@@ -41,6 +43,7 @@ public class NoteFragment extends Fragment {
         return inflater.inflate(R.layout.activity_note_edit, container, false);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -69,11 +72,13 @@ public class NoteFragment extends Fragment {
             if (resultNote.getId() == -1) {
                 ((NotesListActivity) getActivity()).notesRepo.createNote(resultNote);
             }
-
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                ((NotesListActivity) getActivity()).openListFr();
             requireActivity().getSupportFragmentManager().popBackStack();
 
         });
     }
+
 
 
 }

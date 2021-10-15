@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/as_programm"
+        android:title="@string/as_programm"
+        android:icon="@drawable/ic_programm"/>
+
+    <item
+        android:id="@+id/one_fragment"
+        android:title="@string/one_fragment"
+        android:icon="@drawable/ic_one_fragment"/>
+
+    <item
+        android:id="@+id/users_fragment"
+        android:title="@string/new_item"
+        android:icon="@drawable/ic_users"/>
+
+</menu>

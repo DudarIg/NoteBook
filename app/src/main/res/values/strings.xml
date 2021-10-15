@@ -7,4 +7,9 @@
     <string name="hint_zag">Заголовок</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="as_programm">О программе</string>
+    <string name="one_fragment">Все заметки</string>
+    <string name="new_item">Использование</string>
+    <string name="geekbrains_n_android_java">Программа написана в учебных целях на начальном учебном курсе GeekBrains\n по Android программированию на языке Java</string>
+    <string name="text_prog">Текст программы может быть использован всеми без каких-либо ограничений</string>
 </resources>

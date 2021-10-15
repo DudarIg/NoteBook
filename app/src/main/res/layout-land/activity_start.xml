@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.NotesListActivity"
     android:orientation="vertical"
+    tools:context=".ui.NotesListActivity"
     tools:ignore="MissingDefaultResource">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="@string/app_name"
-        android:background="@color/teal_700"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        app:title="@string/app_name" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-         android:layout_weight="1">
-      <FrameLayout
-          android:id="@+id/start_fragment_left"
-          android:layout_width="@dimen/zero"
-          android:layout_height="match_parent"
-          android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/start_fragment_left"
+            android:layout_width="@dimen/zero"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <FrameLayout
             android:id="@+id/start_fragment_right"
             android:layout_width="@dimen/zero"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 

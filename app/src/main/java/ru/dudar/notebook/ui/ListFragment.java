@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import ru.dudar.notebook.R;
@@ -26,7 +27,8 @@ import ru.dudar.notebook.domain.NotesRepo;
 import ru.dudar.notebook.impl.NotesRepoImpl;
 
 
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment  {
+
 
     private RecyclerView recyclerView;
     private NotesAdapter adapter = new NotesAdapter();
@@ -50,6 +52,8 @@ public class ListFragment extends Fragment {
 
         if (savedInstanceState == null)
              initRecycleView(view);
+        else
+            adapter.notifyDataSetChanged();
     }
 
     private void initRecycleView(View view) {
@@ -67,6 +71,11 @@ public class ListFragment extends Fragment {
     public void openNoteFragment(NoteEntity item) {
         ((Controller) requireActivity()).startNoteFragment(item);
     }
+
+//    @Override
+//    public void openListFragment() {
+//        Toast.makeText(getContext(), "ffff", Toast.LENGTH_SHORT).show();
+//    }
 
     interface Controller {
         void startNoteFragment(NoteEntity item);
