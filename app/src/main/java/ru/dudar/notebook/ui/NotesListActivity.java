@@ -36,6 +36,7 @@ import ru.dudar.notebook.impl.NotesRepoImpl;
 
 public class NotesListActivity extends AppCompatActivity implements ListFragment.Controller {
 
+
     private BottomNavigationView bottomMenuView;
 
     public NotesRepo notesRepo = new NotesRepoImpl();
@@ -70,6 +71,31 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
                 .beginTransaction()
                 .replace(R.id.start_fragment_left, new ListFragment())
                 .commit();
+
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.start_fragment_right, NoteFragment.newInstance(null))
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStackImmediate();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.exit)
+                    .setMessage(R.string.exit_note)
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.yes, (arg0, arg1) -> NotesListActivity.super.onBackPressed()).create().show();
+        }
     }
 
     private void initBottomMenu() {
@@ -105,6 +131,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("NOTESREPO", (Serializable) notesRepo);
+
     }
 
     public void startNoteFragment(NoteEntity item) {
