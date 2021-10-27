@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.Serializable;
+
 import ru.dudar.notebook.R;
 import ru.dudar.notebook.domain.NoteEntity;
 
@@ -51,6 +53,10 @@ public class NoteFragment extends Fragment  {
         if (getArguments() != null) {
             setData  = (NoteEntity) getArguments().getSerializable(ARG_PARAM);
         }
+
+        if (savedInstanceState != null)
+            setData = (NoteEntity) savedInstanceState.getSerializable("nnn");
+
         titleEditText = view.findViewById(R.id.title_edit_text);
         detailEditText = view.findViewById(R.id.delail_edit_text);
         saveButton = view.findViewById(R.id.save_button);
@@ -79,6 +85,9 @@ public class NoteFragment extends Fragment  {
         });
     }
 
-
-
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("nnn", (Serializable) setData);
+    }
 }
