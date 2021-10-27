@@ -17,7 +17,7 @@ class NoteFragment : Fragment() {
     lateinit var titleEditText: EditText
     lateinit var detailEditText: EditText
     lateinit var saveButton: Button
-    private var dataId = -1
+    private var dataId = 0
     private var setData: NoteEntity? = null
 
     override fun onCreateView(
@@ -54,10 +54,10 @@ class NoteFragment : Fragment() {
                 detailEditText.getText().toString()
             )
             resultNote.id = dataId
-            if (resultNote.id != -1) {
+            if (resultNote.id != 0) {
                 (activity as NotesListActivity?)!!.notesRepo.editNote(resultNote.id, resultNote)
             }
-            if (resultNote.id == -1) {
+            if (resultNote.id == 0) {
                 (activity as NotesListActivity?)!!.notesRepo.createNote(resultNote)
             }
             if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) (activity as NotesListActivity?)!!.openListFr()
