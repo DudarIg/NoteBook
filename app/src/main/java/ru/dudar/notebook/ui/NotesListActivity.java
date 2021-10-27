@@ -40,6 +40,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
     private BottomNavigationView bottomMenuView;
 
     public NotesRepo notesRepo = new NotesRepoImpl();
+    public NoteEntity zeroItem = new NoteEntity("", "");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
         {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.start_fragment_right, NoteFragment.newInstance(null))
+                    .replace(R.id.start_fragment_right, NoteFragment.newInstance(zeroItem))
                     .addToBackStack(null)
                     .commit();
         }
@@ -173,8 +174,10 @@ public class NotesListActivity extends AppCompatActivity implements ListFragment
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         if (item.getItemId() == R.id.add_note) {
-            startNoteFragment(null);
+
+            startNoteFragment(zeroItem);
             return true;
         }
         return super.onOptionsItemSelected(item);
